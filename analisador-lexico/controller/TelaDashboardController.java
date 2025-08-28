@@ -12,6 +12,7 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
@@ -21,6 +22,13 @@ public class TelaDashboardController implements Initializable {
 
   @FXML
   private AnchorPane anchorPane;
+
+  @FXML
+  private TextArea codigoFonteTextArea;
+
+  public void setCodigo(String codigoAnalisado) {
+    this.codigoFonteTextArea.setText(codigoAnalisado);
+  }
 
   /*
    * ***************************************************************

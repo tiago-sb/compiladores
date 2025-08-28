@@ -10,16 +10,21 @@
 
 package controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 // import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.Cursor;
 
@@ -43,6 +48,40 @@ public class TelaInicialController {
     botaoEnviar.setCursor(Cursor.HAND);
   }
 
+  void mostrarErro(String mensagem) {
+    Alert alerta = new Alert(Alert.AlertType.ERROR);
+    alerta.setTitle("Erro");
+    alerta.setHeaderText(null);
+    alerta.setContentText(mensagem);
+    alerta.showAndWait();
+  }
+
+  public String escolherArquivo() {
+    FileChooser escolhaArquivo = new FileChooser();
+    escolhaArquivo.setTitle("Selecione um arquivo .txt");
+    escolhaArquivo.getExtensionFilters().add(
+        new FileChooser.ExtensionFilter("Arquivos de Texto", "*.txt"));
+
+    File arquivo = escolhaArquivo.showOpenDialog(null);
+
+    if (arquivo != null) {
+      try {
+        return new String(Files.readAllBytes(arquivo.toPath()), StandardCharsets.UTF_8);
+      } catch (IOException e) {
+        mostrarErro("Erro ao ler o arquivo: " + e.getMessage());
+      }
+    }
+
+    return "";
+  }
+
+  public boolean testaConteudo(String conteudo) {
+    if (conteudo == "")
+      mostrarErro("Selecione um arquivo válido.");
+
+    return conteudo == "";
+  }
+
   /*
    * ***************************************************************
    * Metodo: botaoEnviarClicado
@@ -54,46 +93,45 @@ public class TelaInicialController {
    */
   @FXML
   public void botaoEnviarClicado(MouseEvent event) throws IOException {
-    // pega a referencia da janela inicial que possui o botao iniciar
+    // Função para escolher o arquivo de texto e retornar o conteúdo
+    String conteudo = escolherArquivo();
+
+    if (testaConteudo(conteudo))
+      return;
+
+    // pega a referência da janela inicial que possui o botão enviar
     Stage palcoInicial = (Stage) botaoEnviar.getScene().getWindow();
 
-    // carrega o arquivo fxml da tela principal
+    // carrega o arquivo FXML da tela principal
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/tela_dashboard.fxml"));
-    // seta a hierarquia do fxml na variavel raiz
-    Parent raiz = loader.load();
+    
+    // aqui o FXMLLoader instancia o controller e injeta o FXML
+    Parent raiz = loader.load(); 
 
-    // instanciando o objeto controller para poder seta-lo como controlador do fxml
-    // tela_principal
-    TelaDashboardController controller = new TelaDashboardController();
-    loader.setController(controller);
+    // pega o controller corretamente já com o TextArea injetado
+    TelaDashboardController controller = loader.getController();
 
-    // instanciando o objeto palcoPrincipal que sera o novo palco da aplicao
+    // envia o código escolhido para a tela de dashboard
+    controller.setCodigo(conteudo);
+
+    // cria o novo palco da aplicação
     Stage palcoPrincipal = new Stage();
-
-    // objeto chamando o metodo para setar o titulo da janela
     palcoPrincipal.setTitle("Trabalho 01 - Analisador Léxico");
-    // objeto chamando o metodo para impedir da jenela ser redimencionada
     palcoPrincipal.setResizable(false);
-    // objeto chamando metodo para setar uma nova cena para o programa nas dimensoes
-    // 700x400
     palcoPrincipal.setScene(new Scene(raiz, 900, 650));
-    // objeto chamando o metodo para mostrar o conteudo da janela
     palcoPrincipal.show();
 
-    // fechando a janela inicial do programa
+    // fecha a janela inicial
     palcoInicial.close();
 
-    // objeto encerrando todas as instancias relacionadas ao palco principal quando
-    // a janela eh fechada
+    // garante que todas as instâncias sejam encerradas ao fechar o palco
     palcoPrincipal.setOnCloseRequest(t -> {
       Platform.exit();
       System.exit(0);
     });
 
-    // linha para localizar o caminho do LOGO.png do programa e atribuir isso a uma
-    // variavel
+    // opcional: definir ícone da aplicação
     // Image icone = new Image(getClass().getResourceAsStream("/img/logo.png"));
-    // difinicao do icone para a aplicacao
     // palcoPrincipal.getIcons().add(icone);
   }
 }
