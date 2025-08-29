@@ -13,7 +13,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-// import javafx.scene.image.Image;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Principal extends Application {
@@ -34,9 +34,9 @@ public class Principal extends Application {
 
     // linha para localizar o caminho do LOGO.png do programa e atribuir isso a uma
     // variavel
-    // Image icone = new Image(getClass().getResourceAsStream("/img/logo.png"));
+    Image icone = new Image(getClass().getResourceAsStream("/img/icone.png"));
     // difinicao do icone para a aplicacao
-    // palcoPrincipal.getIcons().add(icone);
+    palcoPrincipal.getIcons().add(icone);
 
     // instanciando o objeto controller para poder seta-lo como controlador do fxml
     // tela_inicial

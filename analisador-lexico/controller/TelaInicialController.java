@@ -10,22 +10,18 @@
 
 package controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-// import javafx.scene.image.Image;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import util.Arquivo;
 import javafx.scene.Cursor;
 
 public class TelaInicialController {
@@ -48,40 +44,6 @@ public class TelaInicialController {
     botaoEnviar.setCursor(Cursor.HAND);
   }
 
-  void mostrarErro(String mensagem) {
-    Alert alerta = new Alert(Alert.AlertType.ERROR);
-    alerta.setTitle("Erro");
-    alerta.setHeaderText(null);
-    alerta.setContentText(mensagem);
-    alerta.showAndWait();
-  }
-
-  public String escolherArquivo() {
-    FileChooser escolhaArquivo = new FileChooser();
-    escolhaArquivo.setTitle("Selecione um arquivo .txt");
-    escolhaArquivo.getExtensionFilters().add(
-        new FileChooser.ExtensionFilter("Arquivos de Texto", "*.txt"));
-
-    File arquivo = escolhaArquivo.showOpenDialog(null);
-
-    if (arquivo != null) {
-      try {
-        return new String(Files.readAllBytes(arquivo.toPath()), StandardCharsets.UTF_8);
-      } catch (IOException e) {
-        mostrarErro("Erro ao ler o arquivo: " + e.getMessage());
-      }
-    }
-
-    return "";
-  }
-
-  public boolean testaConteudo(String conteudo) {
-    if (conteudo == "")
-      mostrarErro("Selecione um arquivo válido.");
-
-    return conteudo == "";
-  }
-
   /*
    * ***************************************************************
    * Metodo: botaoEnviarClicado
@@ -94,10 +56,11 @@ public class TelaInicialController {
   @FXML
   public void botaoEnviarClicado(MouseEvent event) throws IOException {
     // Função para escolher o arquivo de texto e retornar o conteúdo
-    String conteudo = escolherArquivo();
+    Arquivo manupularArquivo = new Arquivo();
+    
+    String conteudo = manupularArquivo.escolherArquivo();
 
-    if (testaConteudo(conteudo))
-      return;
+    if (manupularArquivo.testaConteudo(conteudo)) return;
 
     // pega a referência da janela inicial que possui o botão enviar
     Stage palcoInicial = (Stage) botaoEnviar.getScene().getWindow();
@@ -131,7 +94,7 @@ public class TelaInicialController {
     });
 
     // opcional: definir ícone da aplicação
-    // Image icone = new Image(getClass().getResourceAsStream("/img/logo.png"));
-    // palcoPrincipal.getIcons().add(icone);
+    Image icone = new Image(getClass().getResourceAsStream("/img/icone.png"));
+    palcoPrincipal.getIcons().add(icone);
   }
 }

@@ -12,8 +12,12 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import util.Arquivo;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,6 +29,37 @@ public class TelaDashboardController implements Initializable {
 
   @FXML
   private TextArea codigoFonteTextArea;
+
+    @FXML
+    private ImageView analisarCodigo;
+
+    @FXML
+    private ImageView enviarCodigo;
+
+    @FXML
+    void clicouAnalisarCodigo(MouseEvent event) {
+      
+    }
+
+    @FXML
+    private void clicouEnviarArquivo(MouseEvent event) {
+      Arquivo manipularArquivo = new Arquivo();
+      String conteudo = manipularArquivo.escolherArquivo();
+
+      if(manipularArquivo.testaConteudo(conteudo)) return;
+
+      this.codigoFonteTextArea.setText(conteudo);
+    }
+
+    @FXML
+    private void entrouAnalisarCodigo(MouseEvent event) {
+      this.analisarCodigo.setCursor(Cursor.HAND);
+    }
+
+    @FXML
+    void entrouEnviarArquivo(MouseEvent event) {
+      this.enviarCodigo.setCursor(Cursor.HAND);
+    }
 
   public void setCodigo(String codigoAnalisado) {
     this.codigoFonteTextArea.setText(codigoAnalisado);
