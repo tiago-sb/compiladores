@@ -17,6 +17,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
 import util.Arquivo;
 
 import java.net.URL;
@@ -30,36 +31,45 @@ public class TelaDashboardController implements Initializable {
   @FXML
   private TextArea codigoFonteTextArea;
 
-    @FXML
-    private ImageView analisarCodigo;
+  @FXML
+  private ImageView analisarCodigo;
 
-    @FXML
-    private ImageView enviarCodigo;
+  @FXML
+  private ImageView enviarCodigo;
 
-    @FXML
-    void clicouAnalisarCodigo(MouseEvent event) {
-      
-    }
+  @FXML
+  private TextArea saidaAnalisadorTextArea;
 
-    @FXML
-    private void clicouEnviarArquivo(MouseEvent event) {
-      Arquivo manipularArquivo = new Arquivo();
-      String conteudo = manipularArquivo.escolherArquivo();
+  @FXML
+  private TextArea errosTextArea;
 
-      if(manipularArquivo.testaConteudo(conteudo)) return;
+  @FXML
+  void clicouAnalisarCodigo(MouseEvent event) {
+    // String conteudo = this.codigoFonteTextArea.getText();
+    this.saidaAnalisadorTextArea.setText("teste");
+    this.errosTextArea.setText("teste");
+  }
 
-      this.codigoFonteTextArea.setText(conteudo);
-    }
+  @FXML
+  private void clicouEnviarArquivo(MouseEvent event) {
+    Arquivo manipularArquivo = new Arquivo();
+    String conteudo = manipularArquivo.escolherArquivo();
 
-    @FXML
-    private void entrouAnalisarCodigo(MouseEvent event) {
-      this.analisarCodigo.setCursor(Cursor.HAND);
-    }
+    if (manipularArquivo.testaConteudo(conteudo))
+      return;
 
-    @FXML
-    void entrouEnviarArquivo(MouseEvent event) {
-      this.enviarCodigo.setCursor(Cursor.HAND);
-    }
+    this.codigoFonteTextArea.setText(conteudo);
+  }
+
+  @FXML
+  private void entrouAnalisarCodigo(MouseEvent event) {
+    this.analisarCodigo.setCursor(Cursor.HAND);
+  }
+
+  @FXML
+  void entrouEnviarArquivo(MouseEvent event) {
+    this.enviarCodigo.setCursor(Cursor.HAND);
+  }
 
   public void setCodigo(String codigoAnalisado) {
     this.codigoFonteTextArea.setText(codigoAnalisado);
@@ -77,5 +87,13 @@ public class TelaDashboardController implements Initializable {
    */
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
+    this.saidaAnalisadorTextArea.setEditable(false);
+    this.errosTextArea.setEditable(false);
+
+    Font fonteTextArea = Font.loadFont(getClass().getResourceAsStream("/util/font/QuanSlimRegular.ttf"), 28);
+
+    this.codigoFonteTextArea.setFont(fonteTextArea);
+    this.saidaAnalisadorTextArea.setFont(fonteTextArea);
+    this.errosTextArea.setFont(fonteTextArea);
   }
 }
