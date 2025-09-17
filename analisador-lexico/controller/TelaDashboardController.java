@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
+import model.Analise;
 import util.Arquivo;
 
 import java.net.URL;
@@ -45,9 +46,12 @@ public class TelaDashboardController implements Initializable {
 
   @FXML
   void clicouAnalisarCodigo(MouseEvent event) {
-    // String conteudo = this.codigoFonteTextArea.getText();
-    this.saidaAnalisadorTextArea.setText("teste");
-    this.errosTextArea.setText("teste");
+    String conteudo = this.codigoFonteTextArea.getText();
+
+    Analise analise = new Analise(conteudo);
+
+    this.saidaAnalisadorTextArea.setText(analise.getLexamas());
+    this.errosTextArea.setText(analise.getErros());
   }
 
   @FXML
@@ -75,25 +79,17 @@ public class TelaDashboardController implements Initializable {
     this.codigoFonteTextArea.setText(codigoAnalisado);
   }
 
-  /*
-   * ***************************************************************
-   * Metodo: initialize
-   * Funcao: metodo que eh disparado assim que a classe
-   * tela principal controller eh chamada
-   * Parametros: URL url e ResourceBundle resourceBundle - localizar
-   * os arquivos necessarios da janela como botoes, imagens, slides
-   * , e etc
-   * Retorno: void
-   */
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    this.saidaAnalisadorTextArea.setEditable(false);
-    this.errosTextArea.setEditable(false);
-
-    Font fonteTextArea = Font.loadFont(getClass().getResourceAsStream("/util/font/QuanSlimRegular.ttf"), 28);
+    // Fonte personalizada
+    Font fonteTextArea = Font.loadFont(getClass().getResourceAsStream("/util/font/QuanSlimRegular.ttf"), 16);
 
     this.codigoFonteTextArea.setFont(fonteTextArea);
+    
     this.saidaAnalisadorTextArea.setFont(fonteTextArea);
+    this.saidaAnalisadorTextArea.setEditable(false);
+    
     this.errosTextArea.setFont(fonteTextArea);
+    this.errosTextArea.setEditable(false);
   }
 }

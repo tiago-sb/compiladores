@@ -1,41 +1,56 @@
 package model;
 
-import util.TipoErro;
-
 public class Erro {
-  private TipoErro tipoErro;
-  private String mensagemErro;
-  private int linhaErro;
+  private String mensagem;
+  private int linha;
+  private int coluna;
+  private TipoErro tipo;
 
-  public Erro(){}
-
-  public Erro(TipoErro tipoErro, String mensagemErro, int linhaErro){
-    this.tipoErro = tipoErro;
-    this.mensagemErro = mensagemErro;
-    this.linhaErro = linhaErro;
+  public enum TipoErro {
+    CARACTERE_INVALIDO,
+    STRING_NAO_FECHADA,
+    COMENTARIO_NAO_FECHADO,
+    NUMERO_MAL_FORMADO
   }
 
-  public TipoErro getTipoErro() {
-    return tipoErro;
+  public Erro(TipoErro tipo, String mensagem, int linha, int coluna) {
+    this.tipo = tipo;
+    this.mensagem = mensagem;
+    this.linha = linha;
+    this.coluna = coluna;
   }
 
-  public void setTipoErro(TipoErro tipoErro) {
-    this.tipoErro = tipoErro;
+  public Erro(String mensagem, int linha, int coluna) {
+    this.mensagem = mensagem;
+    this.linha = linha;
+    this.coluna = coluna;
+    this.tipo = null;
   }
 
-  public String getMensagemErro() {
-    return mensagemErro;
+  // Getters
+  public String getMensagem() {
+    return mensagem;
   }
 
-  public void setMensagemErro(String mensagemErro) {
-    this.mensagemErro = mensagemErro;
+  public int getLinha() {
+    return linha;
   }
 
-  public int getLinhaErro() {
-    return linhaErro;
+  public int getColuna() {
+    return coluna;
   }
 
-  public void setLinhaErro(int linhaErro) {
-    this.linhaErro = linhaErro;
+  public TipoErro getTipo() {
+    return tipo;
+  }
+
+  @Override
+  public String toString() {
+    if (tipo != null) {
+      return String.format("Erro [%s]: %s (linha %d, coluna %d)",
+          tipo, mensagem, linha, coluna);
+    }
+    return String.format("Erro: %s (linha %d, coluna %d)",
+        mensagem, linha, coluna);
   }
 }
