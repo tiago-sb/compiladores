@@ -13,14 +13,10 @@ public class Analise {
   public String getLexamas() {
     List<Token> tokens = analisadorLexico.analisar();
     StringBuilder listaLexemas = new StringBuilder();
-    int maiorLexema = maiorLexema(tokens);
+    String maiorLexema = maiorLexema(tokens);
 
     for (Token token : tokens) {
-      if(token.getLexema().length() < maiorLexema){
-        listaLexemas.append(String.format("%-" + maiorLexema + "s %s%n", token.getLexema(), token.getTipo()));
-      } else {
-        listaLexemas.append(String.format("%s %s%n", token.getLexema(), token.getTipo()));
-      }
+      listaLexemas.append(String.format("%-" + this.calcularEspaco(maiorLexema, token) + "s %s%n", token.getLexema(), token.getTipo()));
     }
 
     return listaLexemas.toString();
@@ -42,13 +38,20 @@ public class Analise {
     return "\nNenhum erro léxico encontrado.";
   }
 
-  private int maiorLexema(List<Token> tokens) {
-    int max = 0;
+  private int calcularEspaco(String maiorLexema, Token token){
+    int espacos = maiorLexema.length() - token.getLexema().length();
+
+    return espacos + 20;
+  }
+
+  private String maiorLexema(List<Token> tokens) {
+    String tokenSaida = "";
+
     for (Token token : tokens) {
-      if (token.getLexema().length() > max)
-        max = token.getLexema().length();
+      if (token.getLexema().length() > tokenSaida.length())
+        tokenSaida = token.getLexema();
     }
 
-    return max;
+    return tokenSaida;
   }
 }

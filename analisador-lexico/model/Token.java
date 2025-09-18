@@ -63,7 +63,7 @@ public class Token {
       // simbolo especial
       case PONTO: case VIRGULA: case PONTO_VIRGULA:
       case DOIS_PONTOS: case ABRE_PAR: case FECHA_PAR:
-      case ABRE_COL: case FECHA_COL: return "SÍMBOLO ESPECIAL";
+      case ABRE_COL: case FECHA_COL: return "SÍMBOLO_ESPECIAL";
 
       // atribuicao
       case ATRIBUICAO: return "ATRIBUIÇÃO";
