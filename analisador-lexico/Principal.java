@@ -1,8 +1,8 @@
 /* ***************************************************************
-* Autor............: Tiago Santos Bela
+* Autor............: TIAGO SANTOS BELA E CHRISTIAN SCHETTINE PAIVA ROCHA
 * Matricula........: 202220722
 * Inicio...........: 27.08.2025
-* Ultima alteracao.: xx.xx.2025
+* Ultima alteracao.: 18.09.2025
 * Nome.............: Analisador Léxico
 * Funcao...........: Produzir um analisador léxico para a linguagem
 *   de programação mini-pascal.

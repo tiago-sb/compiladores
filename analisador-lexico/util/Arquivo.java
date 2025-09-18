@@ -1,3 +1,13 @@
+/* ***************************************************************
+* Autor............: TIAGO SANTOS BELA E CHRISTIAN SCHETTINE PAIVA ROCHA
+* Matricula........: 202220722
+* Inicio...........: 27.08.2025
+* Ultima alteracao.: 18.09.2025
+* Nome.............: Arquivo
+* Funcao...........: possui todos os métodos necessários para entrada
+*   e tratamento dos textos em .txt que serão analisados pelo analisador
+*************************************************************** */
+
 package util;
 
 import java.io.File;
@@ -11,15 +21,35 @@ import javafx.stage.FileChooser;
 public class Arquivo {
   public Arquivo(){}
   
+  /*
+   * ***************************************************************
+   * Metodo: mostrarErro
+   * Funcao: sinaliza na tela que houve erro no momento de submeter o arquivo 
+   *   .txt
+   * Parametros: String mensagem
+   * Retorno: void
+   */
   public void mostrarErro(String mensagem) {
+    // cria um objeto alert 
     Alert alerta = new Alert(Alert.AlertType.ERROR);
+    
+    // coloca a string no corpo da mensagem 
     alerta.setTitle("Erro");
     alerta.setHeaderText(null);
     alerta.setContentText(mensagem);
     alerta.showAndWait();
   }
 
+  /*
+   * ***************************************************************
+   * Metodo: escolherArquivo
+   * Funcao: recebe o arquivo de texto .txt
+   *   .txt
+   * Parametros: vazio
+   * Retorno: String
+   */
   public String escolherArquivo() {
+    // abre a janela para escolher o arquivo de texto
     FileChooser escolhaArquivo = new FileChooser();
     escolhaArquivo.setTitle("Selecione um arquivo .txt");
     escolhaArquivo.getExtensionFilters().add(
@@ -27,8 +57,10 @@ public class Arquivo {
 
     File arquivo = escolhaArquivo.showOpenDialog(null);
 
+    // if que garante que caso haja erro retorna a mensagem de erro
     if (arquivo != null) {
       try {
+        // pega o conteudo do .txt
         return new String(Files.readAllBytes(arquivo.toPath()), StandardCharsets.UTF_8);
       } catch (IOException e) {
         mostrarErro("Erro ao ler o arquivo: " + e.getMessage());
@@ -38,7 +70,15 @@ public class Arquivo {
     return "";
   }
 
+  /*
+   * ***************************************************************
+   * Metodo: testaConteudo
+   * Funcao: verifica se o conteúdo recebido foi válido ou não
+   * Parametros: vazio
+   * Retorno: String
+   */
   public boolean testaConteudo(String conteudo) {
+    // caso não haja conteúdo mostra que houve erro
     if (conteudo == "")
       mostrarErro("Selecione um arquivo válido.");
 
