@@ -94,6 +94,8 @@ public class AnalisadorLexico {
         processarNumero();
       } else if (atual == '\'') {
         processarCaractereOuString();
+      } else if (atual == '\"') {
+        processarCaractereOuStringEntreAspasDuplas();
       } else if (atual == '{') {
         processarComentario();
       } else {
@@ -105,6 +107,7 @@ public class AnalisadorLexico {
     // tokens analisados retornados 
     return tokens;
   }
+
 
   /*
    * ***************************************************************
@@ -214,6 +217,46 @@ public class AnalisadorLexico {
     boolean fechado = false;
     while (posicao < codigoFonte.length()) {
       if (codigoFonte.charAt(posicao) == '\'') {
+        fechado = true;
+        posicao++;
+        coluna++;
+        break;
+      }
+      if (codigoFonte.charAt(posicao) == '\n') {
+        // String não fechada
+        break; 
+      }
+      posicao++;
+      coluna++;
+    }
+
+    String lexema = codigoFonte.substring(inicio, posicao);
+
+    // verifica se a string recebeu o ', caso não retorna erro, caso tenha apenas
+    // tamanho três significa que é um caracter apenas
+    // caso seja maior que três e foi fechada (recebeu o ') é uma String normal
+    if (!fechado) {
+      erros.add(new Erro(TipoErro.STRING_NAO_FECHADA,
+          "String/caractere não fechado", linhaInicio, colunaInicio));
+    } else if (lexema.length() == 3) { // 'x'
+      tokens.add(new Token(TipoToken.CARACTERE, lexema, linhaInicio, colunaInicio));
+    } else {
+      tokens.add(new Token(TipoToken.STRING_LIT, lexema, linhaInicio, colunaInicio));
+    }
+  }
+
+  private void processarCaractereOuStringEntreAspasDuplas() {
+   int inicio = posicao;
+    int linhaInicio = linha;
+    int colunaInicio = coluna;
+
+    // Pula o primeiro '
+    posicao++; 
+    coluna++;
+
+    boolean fechado = false;
+    while (posicao < codigoFonte.length()) {
+      if (codigoFonte.charAt(posicao) == '\"') {
         fechado = true;
         posicao++;
         coluna++;
