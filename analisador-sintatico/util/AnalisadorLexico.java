@@ -1,9 +1,9 @@
 /* ***************************************************************
 * Autor............: Tiago Santos Bela
 * Matricula........: 202220722
-* Inicio...........: 27.08.2025
-* Ultima alteracao.: 18.09.2025
-* Nome.............: tela principal controller
+* Inicio...........: 12.11.2025
+* Ultima alteracao.: xx.xx.2025
+* Nome.............: analisador léxico
 * Funcao...........: Controla a lóxica central do analisador léxico
 *************************************************************** */
 

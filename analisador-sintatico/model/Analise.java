@@ -1,30 +1,34 @@
 /* ***************************************************************
 * Autor............: TIAGO SANTOS BELA E CHRISTIAN SCHETTINE PAIVA ROCHA
 * Matricula........: 202220722
-* Inicio...........: 27.08.2025
-* Ultima alteracao.: 18.09.2025
+* Inicio...........: 12.11.2025
+* Ultima alteracao.: xx.xx.2025
 * Nome.............: Analise
-* Funcao...........: possui o aparato nececessário para retornar os tokens
-*  observados na fase de análise léxica
+* Funcao...........: possui o aparato nececessário para receber os tokens
+*   classificados na fase léxica da compilação e analisar se estão arranjados
+*   seguindo os critérios estabelecidos pela análise sintática
 *************************************************************** */
 
 package model;
 
 import java.util.List;
 import util.AnalisadorLexico;
+import util.AnalisadorSintatico;
 
 public class Analise {
   private AnalisadorLexico analisadorLexico;
+  private AnalisadorSintatico analisadorSintatico;
 
   public Analise(String conteudo) {
     analisadorLexico = new AnalisadorLexico(conteudo);
+    analisadorSintatico = new AnalisadorSintatico();  
   }
 
   /*
    * ***************************************************************
    * Metodo: getLexamas
    * Funcao: listar todos os lexemas com seus devidos tokens observados
-   *   na fase da análise léxica
+   * na fase da análise léxica
    * Parametros: vazio
    * Retorno: String
    */
@@ -35,9 +39,11 @@ public class Analise {
     // analisa o maior token encontrado, para ajuste da tabela final
     String maiorLexema = maiorLexema(tokens);
 
-    // laço que adiciona os tokens em uma lista de toksn analisados com o lexema e o seu devido tipo
+    // laço que adiciona os tokens em uma lista de toksn analisados com o lexema e o
+    // seu devido tipo
     for (Token token : tokens) {
-      listaLexemas.append(String.format("%-" + this.calcularEspaco(maiorLexema, token) + "s %s%n", token.getLexema(), token.getTipo()));
+      listaLexemas.append(
+          String.format("%-" + this.calcularEspaco(maiorLexema, token) + "s %s%n", token.getLexema(), token.getTipo()));
     }
 
     return listaLexemas.toString();
@@ -72,12 +78,12 @@ public class Analise {
    * ***************************************************************
    * Metodo: calcularEspaco
    * Funcao: calcula a distancia do token em questão para o maior token
-   *   da lista de tokens gerados em relação a tamanho, isso é para a tabela
-   *   final
+   * da lista de tokens gerados em relação a tamanho, isso é para a tabela
+   * final
    * Parametros: vazio
    * Retorno: int
    */
-  private int calcularEspaco(String maiorLexema, Token token){
+  private int calcularEspaco(String maiorLexema, Token token) {
     int espacos = maiorLexema.length() - token.getLexema().length();
     return espacos + 20;
   }

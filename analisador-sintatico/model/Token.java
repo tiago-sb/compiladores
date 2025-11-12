@@ -1,8 +1,8 @@
 /* ***************************************************************
 * Autor............: TIAGO SANTOS BELA E CHRISTIAN SCHETTINE PAIVA ROCHA
 * Matricula........: 202220722
-* Inicio...........: 27.08.2025
-* Ultima alteracao.: 18.09.2025
+* Inicio...........: 12.11.2025
+* Ultima alteracao.: xx.xx.2025
 * Nome.............: Token
 * Funcao...........: possui todos os métodos necessários para lidar
 *   com os tokens

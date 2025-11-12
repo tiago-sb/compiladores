@@ -1,7 +1,7 @@
 /* ***************************************************************
-* Autor............: Tiago Santos Bela
+* Autor............: TIAGO SANTOS BELA E CHRISTIAN SCHETTINE PAIVA ROCHA
 * Matricula........: 202220722
-* Inicio...........: 27.08.2025
+* Inicio...........: 12.11.2025
 * Ultima alteracao.: xx.xx.2025
 * Nome.............: tela inicial controller
 * Funcao...........: Controla os elementos gráficos do JavaFX da 
@@ -79,7 +79,7 @@ public class TelaInicialController {
 
     // cria o novo palco da aplicação
     Stage palcoPrincipal = new Stage();
-    palcoPrincipal.setTitle("Trabalho 01 - Analisador Léxico");
+    palcoPrincipal.setTitle("Trabalho 02 - Analisador Sintático");
     palcoPrincipal.setResizable(false);
     palcoPrincipal.setScene(new Scene(raiz, 900, 650));
     palcoPrincipal.show();
