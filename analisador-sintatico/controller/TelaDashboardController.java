@@ -60,10 +60,12 @@ public class TelaDashboardController implements Initializable {
     Analise analise = new Analise(conteudo);
 
     // seta a lista de tokens no textArea da saida do analisador
-    this.saidaAnalisadorTextArea.setText(analise.getLexamas());
     
-    // seta a lista de erros (caso haja) no textArea dos erros
-    this.errosTextArea.setText(analise.getErros());
+    this.saidaAnalisadorTextArea.setText("=== Análise Sintática ===");
+    this.saidaAnalisadorTextArea.appendText("Iniciando analise sintatica...\n");
+    this.saidaAnalisadorTextArea.appendText("Tokens reconhecidos:\n");
+    this.saidaAnalisadorTextArea.appendText(analise.getLexemasToString() + "\n");
+    this.saidaAnalisadorTextArea.appendText(analise.getAnalise());
   }
 
   /*

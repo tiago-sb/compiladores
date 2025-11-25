@@ -1,8 +1,0 @@
-program teste;
-var a, b: integer;
-begin
-    a := 10
-    b := a * 2  // Falta ponto e vírgula
-    if a = b then
-        write("iguais")
-end.

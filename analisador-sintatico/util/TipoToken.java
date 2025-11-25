@@ -14,7 +14,7 @@ public enum TipoToken {
   // Palavras reservadas
   PROGRAM, VAR, BEGIN, END, IF, THEN, ELSE, WHILE, DO, FOR, TO, DOWNTO,
   FUNCTION, PROCEDURE, INTEGER, REAL, BOOLEAN, CHAR, STRING, ARRAY, OF,
-  TRUE, FALSE, AND, OR, NOT, DIV, MOD,
+  TRUE, FALSE, AND, OR, NOT, DIV, MOD, READ, READLN, WRITE, WRITELN,
 
   // Identificadores e literais
   IDENTIFICADOR, INTEIRO, REAL_NUM, CARACTERE, STRING_LIT,
@@ -25,7 +25,13 @@ public enum TipoToken {
   DOIS_PONTOS, ABRE_PAR, FECHA_PAR, ABRE_COL, FECHA_COL,
 
   // Comentários e outros
-  COMENTARIO, EOF;
+  COMENTARIO, EOF,
+
+  // Para String
+  TIPOSTRING,
+  
+  // Final de sentença
+  $;
 
   int getTipo() {
     throw new UnsupportedOperationException("Unimplemented method 'getTipo'");

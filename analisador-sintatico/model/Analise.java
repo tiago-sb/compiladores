@@ -14,97 +14,91 @@ package model;
 import java.util.List;
 import util.AnalisadorLexico;
 import util.AnalisadorSintatico;
+import util.TabelaSLR;
 
 public class Analise {
   private AnalisadorLexico analisadorLexico;
   private AnalisadorSintatico analisadorSintatico;
+  private Gramatica gramatica;
+  private TabelaSLR tabela;
+  private String conteudo;
 
   public Analise(String conteudo) {
-    analisadorLexico = new AnalisadorLexico(conteudo);
-    analisadorSintatico = new AnalisadorSintatico();  
+    this.analisadorLexico = new AnalisadorLexico(conteudo);
+    this.conteudo = conteudo;
+    this.gramatica = new Gramatica();
+    this.tabela = new TabelaSLR(gramatica);
+    this.analisadorSintatico = new AnalisadorSintatico(gramatica, tabela);
   }
 
   /*
    * ***************************************************************
-   * Metodo: getLexamas
+   * Metodo: getLexemas
    * Funcao: listar todos os lexemas com seus devidos tokens observados
    * na fase da análise léxica
    * Parametros: vazio
    * Retorno: String
    */
-  public String getLexamas() {
-    // pega do analisador léxico os tokens que ele pegou
+  public List<Token> getLexemas() {
+    if (conteudo.trim().isEmpty()) {
+      return null;
+    }
+    
     List<Token> tokens = analisadorLexico.analisar();
-    StringBuilder listaLexemas = new StringBuilder();
-    // analisa o maior token encontrado, para ajuste da tabela final
-    String maiorLexema = maiorLexema(tokens);
+    
+    return tokens;
+  }
 
-    // laço que adiciona os tokens em uma lista de toksn analisados com o lexema e o
-    // seu devido tipo
+  public String getAnalise(){
+    List<Token> tokens = this.getLexemas();
+    String mensagem = "";
+    try {
+      boolean sucesso = this.analisarCodigo(tokens);
+      
+      if (sucesso) { mensagem = "[OK] Codigo sintaticamente correto!\n"; } 
+      else { mensagem = "[ERRO] Erros sintaticos encontrados!\n Verifique a estrutura do codigo."; }
+    } catch (Exception e) {
+      mensagem = "[ERRO] Erro durante a analise: " + e.getMessage() + "\n";
+      e.printStackTrace();
+    }
+
+    return mensagem;
+  }
+
+  public String getLexemasToString(){
+    List<Token> tokens = this.getLexemas();
+    StringBuilder listaLexemas = new StringBuilder();
+    
     for (Token token : tokens) {
-      listaLexemas.append(
-          String.format("%-" + this.calcularEspaco(maiorLexema, token) + "s %s%n", token.getLexema(), token.getTipo()));
+        if (!token.getTipo().equals("$")) {
+          listaLexemas.append("  " + token + "\n");
+      }
     }
 
     return listaLexemas.toString();
   }
 
-  /*
-   * ***************************************************************
-   * Metodo: getErros
-   * Funcao: listar todos os erros observados na fase da análise léxica
-   * Parametros: vazio
-   * Retorno: String
-   */
-  public String getErros() {
-    // caso tenha erro ele lista os erros na tela
-    if (analisadorLexico.temErros()) {
-      StringBuilder listaErros = new StringBuilder();
-      listaErros.append("\nERROS:");
-
-      // percorre os erros encontrados adicionando eles em uma lista de erros
-      for (Erro erro : analisadorLexico.getErros()) {
-        listaErros.append(String.format("Erro: %-30s Mensagem: %-30s Linha: %d Coluna: %d%n",
-            erro.getTipo(), erro.getMensagem(), erro.getLinha(), erro.getColuna()));
-      }
-
-      return listaErros.toString();
-    }
-
-    return "\nNenhum erro léxico encontrado.";
+  public boolean analisarCodigo(List<Token> tokens) {
+    return analisadorSintatico.analisar(tokens);
   }
-
-  /*
-   * ***************************************************************
-   * Metodo: calcularEspaco
-   * Funcao: calcula a distancia do token em questão para o maior token
-   * da lista de tokens gerados em relação a tamanho, isso é para a tabela
-   * final
-   * Parametros: vazio
-   * Retorno: int
-   */
-  private int calcularEspaco(String maiorLexema, Token token) {
-    int espacos = maiorLexema.length() - token.getLexema().length();
-    return espacos + 20;
+    
+  public String getInfoGramatica() {
+    return gramatica.getInfoConjuntos();
   }
-
-  /*
-   * ***************************************************************
-   * Metodo: maiorLexema
-   * Funcao: retorna o maior token encontrado na lista de tokens
-   * Parametros: vazio
-   * Retorno: String
-   */
-  private String maiorLexema(List<Token> tokens) {
-    String tokenSaida = "";
-
-    for (Token token : tokens) {
-      // caso o token em questão seja maior do que o maior token até então encontrado
-      // o maior token é atualizado
-      if (token.getLexema().length() > tokenSaida.length())
-        tokenSaida = token.getLexema();
-    }
-
-    return tokenSaida;
+    
+  public String getRelatorioCompleto() {
+    return analisadorSintatico.getRelatorioAnalise();
+  }
+    
+  public List<String> getHistoricoAnalise() {
+    return analisadorSintatico.getHistorico();
+  }
+    
+  public Gramatica getGramatica() {
+    return gramatica;
+  }
+    
+  public String getInfoTabela() {
+    return tabela.getInfoTabela();
   }
 }

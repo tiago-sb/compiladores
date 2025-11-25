@@ -14,6 +14,7 @@ import util.TipoToken;
 
 public class Token {
   private TipoToken tipo;
+  private String tipoString;
   private String lexema;
   private int linha;
   private int coluna;
@@ -85,9 +86,21 @@ public class Token {
     this.coluna = coluna;
   }
 
+  public Token(String tipo, String lexema, int linha, int coluna) {
+    this.tipo = TipoToken.TIPOSTRING;
+    this.tipoString = tipo;
+    this.lexema = lexema;
+    this.linha = linha;
+    this.coluna = coluna;
+  }
+
   // Get
   public String getTipo() {
     return this.mapTipo(tipo);
+  }
+  
+  public String getTipoString(){
+    return this.tipoString;
   }
   
   // Get

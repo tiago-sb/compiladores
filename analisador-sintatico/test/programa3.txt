@@ -1,5 +1,0 @@
-program simples
-begin
-    read(x);
-    writeln(x * 2);
-end.

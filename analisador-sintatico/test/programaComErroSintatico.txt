@@ -1,0 +1,5 @@
+program programaComErroSintatico;
+var x : integer;
+begin
+    x := 3 // falta o pronto e vírgula aqui
+end.

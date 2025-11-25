@@ -1,0 +1,6 @@
+program programaComEntradaSaida;
+var x, y : integer;	
+begin
+    read(x, y);
+    writeln(“:”, x, y);
+             end.
