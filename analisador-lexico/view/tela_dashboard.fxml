@@ -23,7 +23,6 @@
             <Image url="@../img/enviar_arquivo.png" />
          </image>
       </ImageView>
-      <TextArea fx:id="errosTextArea" layoutX="451.0" layoutY="380.0" prefHeight="226.0" prefWidth="414.0" />
-      <TextArea fx:id="saidaAnalisadorTextArea" layoutX="451.0" layoutY="99.0" prefHeight="214.0" prefWidth="414.0" />
+      <TextArea fx:id="saidaAnalisadorTextArea" layoutX="449.0" layoutY="99.0" prefHeight="504.0" prefWidth="414.0" />
    </children>
 </AnchorPane>
