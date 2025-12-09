@@ -1,6 +1,12 @@
 program programaComEntradaSaida;
 var x, y : integer;	
 begin
-    read(x, y);
-    writeln(“:”, x, y);
-             end.
+  read(x);
+  read(y);
+  
+  x = x + y;
+  y = x + 80 * 50;
+  
+  writeln(x);
+  writeln(y);
+end.

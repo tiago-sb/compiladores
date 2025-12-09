@@ -1,0 +1,39 @@
+Primeiros e Seguidores
+Primeiros:
+Primeiros(S) = {program}
+Primeiros(D) = {var}
+Primeiros(V) = {id}
+Primeiros(T) = {Boolean, integer}
+Primeiros(I) = {id}
+Primeiros(L) = {begin, id, if, read, readln, while, write, writeln}
+Primeiros(C) = {begin, id, if, read, readln, while, write, writeln}
+Primeiros(A) = {id}
+Primeiros(R) = {read, readln}
+Primeiros(W) = {write, writeln}
+Primeiros(F) = {(, id, num, str}
+Primeiros(G) = {(, id, num, str}
+Primeiros(M) = {begin}
+Primeiros(N) = {if}
+Primeiros(P) = {while}
+Primeiros(E) = {(, id, num}
+Primeiros(B) = {(, id, num}
+
+Seguidores:
+Seguidores(S') = {$}
+Seguidores(S) = {$}
+Seguidores(D) = {begin}
+Seguidores(V) = {begin}
+Seguidores(T) = {;}
+Seguidores(I) = {), :}
+Seguidores(L) = {end}
+Seguidores(C) = {;, else}
+Seguidores(A) = {;, else}
+Seguidores(R) = {;, else}
+Seguidores(W) = {;, else}
+Seguidores(F) = {)}
+Seguidores(G) = {), ,}
+Seguidores(M) = {;, else}
+Seguidores(N) = {;, else}
+Seguidores(P) = {;, else}
+Seguidores(E) = {), *, +, ,, -, /, ;, <, <=, <>, =, >, >=, do, else, then}
+Seguidores(B) = {do, then}

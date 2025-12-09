@@ -1,12 +1,8 @@
-program programaComEstruturasCondicionais
-var a, b : integer;
+program programaComEstruturasCondicionais;
+var a : boolean;
 begin
-    a := 5;
-    b := 0;
+  a = 1 < 10;
 
-    if a > 0 then
-        b := a * 2;
-    else
-        b := -1;
-
+  if a > 0 then
+    writeln('1');
 end.

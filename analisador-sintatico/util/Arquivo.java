@@ -1,8 +1,8 @@
 /* ***************************************************************
 * Autor............: TIAGO SANTOS BELA E CHRISTIAN SCHETTINE PAIVA ROCHA
-* Matricula........: 202220722
-* Inicio...........: 12.11.2025
-* Ultima alteracao.: xx.xx.2025
+* Matricula........: 202220722 e 202210159
+* Inicio...........: 30.11.2025
+* Ultima alteracao.: 09.12.2025
 * Nome.............: Arquivo
 * Funcao...........: possui todos os métodos necessários para entrada
 *   e tratamento dos textos em .txt que serão analisados pelo analisador

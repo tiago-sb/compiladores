@@ -1,0 +1,48 @@
+Gramática
+0. S' → S
+1. S → program id ; D begin L end .
+2. S → program id ; begin L end .
+3. D → var V
+4. V → I : T ; V
+5. V → I : T ;
+6. T → integer
+7. T → Boolean
+8. I → id
+9. I → id , I
+10. L → C ;
+11. L → C ; L
+12. C → A
+13. C → R
+14. C → W
+15. C → M
+16. C → N
+17. C → P
+18. A → id := E
+19. R → read ( I )
+20. R → readln
+21. R → readln ( I )
+22. W → write ( F )
+23. W → writeln
+24. W → writeln ( F )
+25. F → G
+26. F → G , F
+27. G → str
+28. G → E
+29. M → begin L end
+30. N → if B then C
+31. N → if B then C else C
+32. P → while B do C
+33. E → E + E
+34. E → E - E
+35. E → E * E
+36. E → E / E
+37. E → ( E )
+38. E → id
+39. E → num
+40. B → E < E
+41. B → E <= E
+42. B → E > E
+43. B → E >= E
+44. B → E = E
+45. B → E <> E
+46. B → id

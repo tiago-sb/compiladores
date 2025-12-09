@@ -1,8 +1,8 @@
 /* ***************************************************************
 * Autor............: TIAGO SANTOS BELA E CHRISTIAN SCHETTINE PAIVA ROCHA
-* Matricula........: 202220722
-* Inicio...........: 27.08.2025
-* Ultima alteracao.: 18.09.2025
+* Matricula........: 202220722 e 202210159
+* Inicio...........: 30.11.2025
+* Ultima alteracao.: 09.12.2025
 * Nome.............: Analisador Sintático
 * Funcao...........: Produzir um analisador sintático para a linguagem
 *   de programação sigma.

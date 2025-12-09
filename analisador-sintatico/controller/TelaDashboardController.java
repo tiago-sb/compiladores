@@ -1,8 +1,8 @@
 /* ***************************************************************
-* Autor............: Tiago Santos Bela
-* Matricula........: 202220722
-* Inicio...........: 12.11.2025
-* Ultima alteracao.: xx.xx.2025
+* Autor............: TIAGO SANTOS BELA E CHRISTIAN SCHETTINE PAIVA ROCHA
+* Matricula........: 202220722 e 202210159
+* Inicio...........: 30.11.2025
+* Ultima alteracao.: 09.12.2025
 * Nome.............: telaDashboardController
 * Funcao...........: Controla os elementos gráficos do JavaFX da 
 *   tela de dashboard
@@ -41,14 +41,30 @@ public class TelaDashboardController implements Initializable {
   @FXML
   private TextArea saidaAnalisadorTextArea;
 
-  @FXML
-  private TextArea errosTextArea;
+  private String formatarHistoricoTSB(java.util.List<String> historico) {
+    if (historico == null || historico.isEmpty()) {
+      return "Nenhum rastreio sintático disponível.\n";
+    }
+
+    StringBuilder sb = new StringBuilder();
+
+    // O cabeçalho TSB é necessário para a Saída TSB
+    sb.append("\n=== Rastreio Sintático ===\n");
+    sb.append("Pilha | Cadeia | Ação\n");
+
+    // Adiciona o conteúdo de cada passo
+    for (String passo : historico) {
+      sb.append(passo).append("\n");
+    }
+
+    return sb.toString();
+  }
 
   /*
    * ***************************************************************
    * Metodo: clicouAnalisarCodigo
    * Funcao: mostra os tokens e os erros em seus respectivos textAreas
-   *   quando o botão é clicado
+   * quando o botão é clicado
    * Parametros: MouseEvent event - evento que dispara quando o mouse
    * entra no botao enviar
    * Retorno: void
@@ -58,21 +74,25 @@ public class TelaDashboardController implements Initializable {
     String conteudo = this.codigoFonteTextArea.getText();
 
     Analise analise = new Analise(conteudo);
-
     // seta a lista de tokens no textArea da saida do analisador
-    
-    this.saidaAnalisadorTextArea.setText("=== Análise Sintática ===");
-    this.saidaAnalisadorTextArea.appendText("Iniciando analise sintatica...\n");
+    this.saidaAnalisadorTextArea.setText("=== Análise Léxica ===\n");
+    this.saidaAnalisadorTextArea.appendText("Iniciando analise léxica...\n");
     this.saidaAnalisadorTextArea.appendText("Tokens reconhecidos:\n");
     this.saidaAnalisadorTextArea.appendText(analise.getLexemasToString() + "\n");
+
+    this.saidaAnalisadorTextArea.appendText("=== Análise Sintá´tica ===\n");
+    this.saidaAnalisadorTextArea.appendText("Iniciando analise léxica...\n");
     this.saidaAnalisadorTextArea.appendText(analise.getAnalise());
+
+    String historico = formatarHistoricoTSB(analise.getHistoricoAnalise());
+    this.saidaAnalisadorTextArea.appendText(historico);
   }
 
   /*
    * ***************************************************************
    * Metodo: clicouAnalisarCodigo
    * Funcao: mostra os tokens e os erros em seus respectivos textAreas
-   *   quando o botão é clicado
+   * quando o botão é clicado
    * Parametros: MouseEvent event - evento que dispara quando o mouse
    * entra no botao enviar
    * Retorno: void
@@ -124,13 +144,9 @@ public class TelaDashboardController implements Initializable {
     Font fonteTextArea = Font.loadFont(getClass().getResourceAsStream("/util/font/QuanSlimRegular.ttf"), 16);
 
     this.codigoFonteTextArea.setFont(fonteTextArea);
-    
+
     this.saidaAnalisadorTextArea.setFont(fonteTextArea);
     // impede a moficiação do conteúdo da seção do analisador
     this.saidaAnalisadorTextArea.setEditable(false);
-    
-    this.errosTextArea.setFont(fonteTextArea);
-    // impede a moficiação do conteúdo da seção de erros
-    this.errosTextArea.setEditable(false);
   }
 }

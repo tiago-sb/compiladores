@@ -1,9 +1,9 @@
 /* ***************************************************************
 * Autor............: TIAGO SANTOS BELA E CHRISTIAN SCHETTINE PAIVA ROCHA
-* Matricula........: 202220722
-* Inicio...........: 12.11.2025
-* Ultima alteracao.: xx.xx.2025
-* Nome.............: tela inicial controller
+* Matricula........: 202220722 e 202210159
+* Inicio...........: 30.11.2025
+* Ultima alteracao.: 09.12.2025
+* Nome.............: produção
 * Funcao...........: Controla os elementos gráficos do JavaFX da 
 *   tela inicial
 *************************************************************** */

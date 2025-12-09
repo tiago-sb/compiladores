@@ -1,11 +1,11 @@
 /* ***************************************************************
 * Autor............: TIAGO SANTOS BELA E CHRISTIAN SCHETTINE PAIVA ROCHA
-* Matricula........: 202220722
-* Inicio...........: 12.11.2025
-* Ultima alteracao.: xx.xx.2025
+* Matricula........: 202220722 e 202210159
+* Inicio...........: 30.11.2025
+* Ultima alteracao.: 09.12.2025
 * Nome.............: Erro
 * Funcao...........: possui todos os métodos necessários para lidar
-*   com os erros
+*   com os possíveis erros aparecidos na análise léxica e sintática
 *************************************************************** */
 
 package model;

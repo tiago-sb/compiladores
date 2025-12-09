@@ -1,8 +1,8 @@
 /* ***************************************************************
 * Autor............: TIAGO SANTOS BELA E CHRISTIAN SCHETTINE PAIVA ROCHA
-* Matricula........: 202220722
-* Inicio...........: 12.11.2025
-* Ultima alteracao.: xx.xx.2025
+* Matricula........: 202220722 e 202210159
+* Inicio...........: 30.11.2025
+* Ultima alteracao.: 09.12.2025
 * Nome.............: Token
 * Funcao...........: possui todos os métodos necessários para lidar
 *   com os tokens
@@ -122,6 +122,6 @@ public class Token {
   @Override
   public String toString() {
     return String.format("Token [%s, '%s', linha=%d, coluna=%d]",
-        tipo, lexema, linha, coluna);
+        this.getTipoString(), lexema, linha, coluna);
   }
 }
