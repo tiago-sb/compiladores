@@ -16,7 +16,6 @@ import javafx.scene.Cursor;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import model.Analise;
 import util.Arquivo;
@@ -25,10 +24,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TelaDashboardController implements Initializable {
-
-  @FXML
-  private AnchorPane anchorPane;
-
   @FXML
   private TextArea codigoFonteTextArea;
 
@@ -40,9 +35,6 @@ public class TelaDashboardController implements Initializable {
 
   @FXML
   private TextArea saidaAnalisadorTextArea;
-
-  @FXML
-  private TextArea errosTextArea;
 
   /*
    * ***************************************************************
@@ -61,9 +53,6 @@ public class TelaDashboardController implements Initializable {
 
     // seta a lista de tokens no textArea da saida do analisador
     this.saidaAnalisadorTextArea.setText(analise.getLexamas());
-    
-    // seta a lista de erros (caso haja) no textArea dos erros
-    this.errosTextArea.setText(analise.getErros());
   }
 
   /*
@@ -126,9 +115,5 @@ public class TelaDashboardController implements Initializable {
     this.saidaAnalisadorTextArea.setFont(fonteTextArea);
     // impede a moficiação do conteúdo da seção do analisador
     this.saidaAnalisadorTextArea.setEditable(false);
-    
-    this.errosTextArea.setFont(fonteTextArea);
-    // impede a moficiação do conteúdo da seção de erros
-    this.errosTextArea.setEditable(false);
   }
 }
